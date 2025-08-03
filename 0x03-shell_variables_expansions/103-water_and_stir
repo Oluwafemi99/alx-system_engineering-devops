@@ -1,0 +1,2 @@
+#!/bin/bash
+echo $((5#$(echo $WATER|tr water 01234)+6#$(echo $STIR|tr stir. 012345)))|awk '{b="bestchol.";r="";while($1){r=substr(b,$1%9+1,1)r;$1=int($1/9)}print r}'
