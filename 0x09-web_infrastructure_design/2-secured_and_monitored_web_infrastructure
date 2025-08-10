@@ -1,0 +1,43 @@
+link to whiteboard
+https://imgur.com/wHp7vAc
+
+Security component
+Firewalls (3 Total)
+Firewall #1: Protects the load balancer from direct internet access.
+Firewall #2–4: Protect each web server individually to isolate threats and enforce internal traffic rules.
+Purpose:
+Prevent unauthorized access.
+Filter traffic based on IP, port, and protocol.
+Enforce segmentation between public and private zones.
+SSL Certificate
+Installed on the load balancer to serve www.foobar.com over HTTPS.
+Purpose:
+Encrypts traffic between clients and the infrastructure.
+Ensures data confidentiality and integrity.
+Builds trust with users by validating the server’s identity.
+
+Monitoring Components
+Monitoring Clients (3 Total)
+-Installed on each web server.
+-Collect logs, metrics, and performance data.
+Purpose:
+Detect anomalies, errors,  performance bottlenecks, provide visibility into server health and
+ traffic patterns and enable alerting and proactive maintenance.
+
+
+Infrastructure Issues & Limitations
+SSL Termination at Load Balancer
+-Issue: Traffic between the load balancer and backend servers is unencrypted.
+-Risk: Internal traffic could be intercepted if the network is compromised.
+-Solution: Use end-to-end encryption or re-encrypt traffic after termination.
+Single Writable MySQL Server
+-issue: Creates a single point of failure.
+-Risk: If the server goes down, no writes can be made.
+-Solution: Implement MySQL replication with failover or use multi-primary clustering.
+
+
+
+
+
+
+

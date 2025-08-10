@@ -1,12 +1,52 @@
-User Browser
-    ↓
-DNS (www.foobar.com → LB IP)
-    ↓
-[ HAProxy Load Balancer ]
-   /         \
-[Web Server1] [Web Server2]
-   |              |
-[Application Server]
-   |
-MySQL Primary <---replication---> MySQL Replica
+Distributed web infrastructure
+Database Layer: MySQL Primary & Replica servers
+
+
+link to whiteboard
+https://imgur.com/uDKfXdu
+
+Explanation of Each Component
+1. Why Adding Each Element
+Extra Servers → Improve redundancy and availability.
+Load Balancer (HAProxy) → Distributes traffic to multiple servers, reducing load on each.
+Database Primary-Replica → Improves read performance and fault tolerance; replicas can take over in case of primary failure.
+
+
+2. Load Balancer Algorithm
+Round Robin: Requests are distributed sequentially to each backend server in turn.
+
+
+3. Active-Active vs. Active-Passive
+Active-Active: All servers actively handle traffic simultaneously.
+Active-Passive: One server handles traffic while the other remains idle until failover.
+Here, HAProxy is Active-Active — both servers handle requests concurrently.
+
+
+4. Primary-Replica Cluster
+Primary (Master): Handles all write operations (INSERT, UPDATE, DELETE).
+Replica (Slave): Handles read-only queries (SELECT).
+Replication keeps the replica synced with the primary so that read queries are offloaded.
+
+
+5. Differences Between Primary and Replica
+Primary: Can read/write; must be up for data changes.
+Replica: Read-only; improves performance by handling heavy read traffic.
+
+
+
+
+
+Issues in This Infrastructure
+SPOF (Single Point of Failure)
+If the load balancer fails entire site is down.
+If the primary database fails without failover configured writes fail.
+
+
+Security Issues
+No firewall to filter malicious traffic.
+No HTTPS for encrypted communication.
+
+
+No Monitoring
+No tools to detect downtime, performance issues, or security breaches.
 

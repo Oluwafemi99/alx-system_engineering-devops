@@ -1,21 +1,46 @@
-yaml
+link to white board diagram
+https://imgur.com/eOStJBx
 
-[User's Browser]
-        |
-   Internet
-        |
- DNS lookup (www.foobar.com → 8.8.8.8)
-        |
-  [Server: 8.8.8.8]
-  ┌──────────────────────────┐
-  | Nginx (Web Server)       |
-  └─────────────┬────────────┘
-                |
-        Gunicorn / uWSGI (Application Server)
-                |
-        Application Code (Django/Flask/etc.)
-                |
-          MySQL Database
-  ┌──────────────────────────┐
-  | Data Storage              |
-  └──────────────────────────┘
+
+
+
+
+Simple web stack
+User requests website
+In the browser, the user will  access: www.foobar.com, then the browser asks the DNS system: what ip address is this?
+DNS responds: “8.8.8.8” (your server's IP).
+
+
+Request hits your server
+The request arrives at Nginx (the web server) on your server at IP 8.8.8.8.
+
+
+Nginx role
+Nginx handles HTTP/HTTPS requests. Serves static files (CSS, images, JS) and passes dynamic requests to the application server.
+
+
+Application server role (Gunicorn/uWSGI)
+It recieves requests from Nginx for dynamic pages and runs your application code. Calls the database if needed.
+
+
+Database role (MySQL)
+Stores data (users, products, bookings,) and responds to queries from the application server.
+
+
+Response to user
+Application server sends generated HTML → Nginx → Internet → User’s browser.
+
+Key Infrastructure Concepts
+Server:
+ A physical or virtual machine that stores and runs your application, web server, and database.
+
+Domain name:
+ Human-friendly address (foobar.com) that maps to your server's IP.
+
+DNS record type for www:
+ www is a CNAME or A record pointing to your domain or IP.
+If www → IP, it’s an A record.
+If www → foobar.com, then it’s a CNAME.
+
+
+
