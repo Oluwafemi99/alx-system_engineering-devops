@@ -1,0 +1,56 @@
+link to whiteboard
+
+https://imgur.com/nAvN3R1
+
+
+
+
+Components Added & Their Purpose
+
+Additional Server
+
+Purpose: Hosts a dedicated monitoring agent or can be used for future scaling (e.g., caching, analytics).
+
+Why: Improves modularity and allows for better resource allocation and observability.
+
+HAProxy Load Balancer Cluster (2 Nodes)
+
+Purpose: Distributes incoming traffic across web servers.
+
+Why: Clustering ensures high availability—if one load balancer fails, the other takes over.
+
+SSL Termination: Handles HTTPS encryption at the edge.
+
+Split Components
+
+
+Web Server (Nginx):
+
+Serves static content and forwards requests to the app server.
+
+Isolated for performance and security.
+
+Application Server (Gunicorn, Node.js, etc.):
+
+Handles business logic and dynamic content.
+
+Separation allows independent scaling.
+
+Database Server (MySQL):
+
+Stores persistent data.
+
+Dedicated server ensures data integrity and performance.
+
+Technical Benefits of This Architecture
+
+Security: Firewalls and HTTPS protect against unauthorized access and data leaks.
+
+Scalability: Each layer can be scaled independently based on load.
+
+Resilience: HAProxy clustering and component isolation reduce single points of failure.
+
+Maintainability: Easier to update or troubleshoot individual layers.
+
+
+
