@@ -1,0 +1,21 @@
+yaml
+
+[User's Browser]
+        |
+   Internet
+        |
+ DNS lookup (www.foobar.com → 8.8.8.8)
+        |
+  [Server: 8.8.8.8]
+  ┌──────────────────────────┐
+  | Nginx (Web Server)       |
+  └─────────────┬────────────┘
+                |
+        Gunicorn / uWSGI (Application Server)
+                |
+        Application Code (Django/Flask/etc.)
+                |
+          MySQL Database
+  ┌──────────────────────────┐
+  | Data Storage              |
+  └──────────────────────────┘

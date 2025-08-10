@@ -1,0 +1,12 @@
+User Browser
+    ↓
+DNS (www.foobar.com → LB IP)
+    ↓
+[ HAProxy Load Balancer ]
+   /         \
+[Web Server1] [Web Server2]
+   |              |
+[Application Server]
+   |
+MySQL Primary <---replication---> MySQL Replica
+
